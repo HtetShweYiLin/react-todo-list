@@ -1,9 +1,9 @@
 import './App.css';
-import Todo from './components/todo';
+import { Counter } from './features/counter/components/counter';
 
 function App() {
   return (
-    <Todo></Todo>
+    <Counter />
   );
 }
 
