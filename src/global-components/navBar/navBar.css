@@ -1,0 +1,19 @@
+.navbar-container {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #F2F3F5;
+    display: flex;
+}
+
+.navItem {
+    display: block;
+    color: #363F4D;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.navItem:hover {
+    background-color: #E8E9EB;
+}

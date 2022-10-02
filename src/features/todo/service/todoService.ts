@@ -1,5 +1,5 @@
 import Api from './Api';
-import { TodoModel } from '../models/todo-model';
+import { TodoModel } from '../types/todo-model';
 export default{
     async getAllTodos(){
         var response=await Api().get('todos');

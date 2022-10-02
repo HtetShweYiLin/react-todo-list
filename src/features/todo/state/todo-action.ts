@@ -1,8 +1,8 @@
 import todoSlice from './todo-slice'
 import { AnyAction } from '@reduxjs/toolkit'
 import { ThunkAction } from '@reduxjs/toolkit'
-import {RootState} from './index'
-import { TodoModel } from '../models/todo-model';
+import {RootState} from '../../../store/index'
+import { TodoModel } from '../types/todo-model';
 import TodoService from "../service/todoService";
 
 export const todoActions=todoSlice.actions

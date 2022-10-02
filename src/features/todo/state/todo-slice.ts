@@ -1,4 +1,4 @@
-import { TodoModel, TodoArrayModel } from "../models/todo-model";
+import { TodoModel, TodoArrayModel } from "../types/todo-model";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 const initialTodoState: TodoArrayModel = {
