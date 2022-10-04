@@ -1,16 +1,17 @@
 import React, { FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { useGetUniversityListQuery } from "../../api/university/universityApi";
+import { useGetCocktailListQuery } from "../../api/cocktail/cocktailApi";
 import { Cocktail } from "../../models/cocktail";
 import { getDetailCocktail } from "./homeSclice";
+
 const Home: FC = () => {
-  const { data, error, isLoading } = useGetUniversityListQuery({
+  const { data, error, isLoading } = useGetCocktailListQuery({
     country: "Turkey",
   });
   const navigate = useNavigate();
 
-  const cocktailList = useSelector((state: any) => state.home.universityList);
+  const cocktailList = useSelector((state: any) => state.home.cocktailList);
   const dispatch = useDispatch();
 //   const handleDelete = (university: University) => {
 //     dispatch(deleteUniversity(university));

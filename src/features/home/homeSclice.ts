@@ -28,7 +28,7 @@ export const homeSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addMatcher(
-      cocktailApi.endpoints.getUniversityList.matchFulfilled,
+      cocktailApi.endpoints.getCocktailList.matchFulfilled,
       (state, action) => {
         state.cocktailList = action.payload;
       }

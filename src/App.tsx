@@ -1,12 +1,13 @@
 import './App.css';
-import { HashRouter as Router, Routes, Route, Link} from 'react-router-dom';
-import './App.css';
+import { BrowserRouter } from "react-router-dom";
+import Home from "./features/home/home"
+// import Router from "./router/router";
 
 function App() {
   return (
-    <div>
-      Test
-    </div>
+    <BrowserRouter>
+      <Home />
+    </BrowserRouter>
   );
 }
 

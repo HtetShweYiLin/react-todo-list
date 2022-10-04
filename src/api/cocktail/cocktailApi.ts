@@ -4,18 +4,19 @@ import { Cocktail } from "../../models/cocktail";
 export const cocktailApi = createApi({
   reducerPath: "cocktailApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=Cocktail",
+    baseUrl: "https://www.thecocktaildb.com/api/json/v1/1/",
   }),
   endpoints: (builder) => ({
-    getUniversityList: builder.query({
+    getCocktailList: builder.query({
       query: (country) => ({
-        url: `search`,
-        params: country,
+        url: `filter.php?c=Cocktail`
       }),
 
-      transformResponse: (response: Cocktail[]) => {
+      transformResponse: (response: any) => {
         let cocktailArray: Cocktail[] = [];
-        response.map((cocktail: any) => {
+        console.log("response",response.drinks);
+        let res = response.drinks;
+        res.map((cocktail: any) => {
           let cocktailObj: Cocktail = {
             drinkId: cocktail.idDrink,
             drinkName: cocktail.strDrink,
@@ -23,6 +24,7 @@ export const cocktailApi = createApi({
           };
           cocktailArray.push(cocktailObj);
         });
+        console.log("cocktailArray",cocktailArray)
         return cocktailArray;
       },
     }),
