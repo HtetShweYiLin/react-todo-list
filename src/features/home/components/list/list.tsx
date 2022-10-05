@@ -7,7 +7,7 @@ import "./list.css";
 export interface IProps {
   cocktailList: Cocktail[];
 //   handleDelete: (university: Cocktail) => void;
-  handleDetail: (university: Cocktail) => void;
+  handleDetail: (cocktail: Cocktail) => void;
 }
 
 const List: FC<IProps> = ({ cocktailList, handleDetail }) => {

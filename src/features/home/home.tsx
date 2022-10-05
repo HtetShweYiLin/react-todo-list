@@ -19,8 +19,9 @@ const Home: FC = () => {
 //   };
 
   const handleDetail = (cocktail: Cocktail) => {
+    console.log("handleDetail")
     dispatch(getDetailCocktail(cocktail.drinkId));
-    navigate(`/detail/${cocktail.drinkId}`);
+    navigate(`/cocktail/${cocktail.drinkId}`);
   };
 
   return (

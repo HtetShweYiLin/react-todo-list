@@ -13,16 +13,17 @@ const ListItem: FC<IProps> = ({ item, handleDetail }) => {
 //     handleDelete(item);
 //   };
   const onClickCard = () => {
+    console.log("onClickCard",item)
     handleDetail(item);
   };
   return (
     <>
       <div className="card">
-        <div className="card-info">
+        <div className="card-info" onClick={onClickCard}>
           <div>
             <img className="thumbnail-img" src={item.drinkThumbnail} />
           </div>
-          <div className="h4-strong text-c300 card-body" onClick={onClickCard}>
+          <div className="h4-strong text-c300 card-body">
             {item.drinkName}
           </div>
         </div>

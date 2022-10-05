@@ -1,12 +1,12 @@
 import './App.css';
 import { BrowserRouter } from "react-router-dom";
-import Home from "./features/home/home"
-// import Router from "./router/router";
+import Home from "./features/home/home";
+import Router from './router/Router';
 
 function App() {
   return (
     <BrowserRouter>
-      <Home />
+      <Router />
     </BrowserRouter>
   );
 }
