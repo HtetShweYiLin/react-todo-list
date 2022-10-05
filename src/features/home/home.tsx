@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useGetCocktailListQuery } from "../../api/cocktail/cocktailApi";
 import { Cocktail } from "../../models/cocktail";
 import { getDetailCocktail } from "./homeSclice";
+import List from "./components/list/list";
 
 const Home: FC = () => {
   const { data, error, isLoading } = useGetCocktailListQuery({
@@ -30,11 +31,7 @@ const Home: FC = () => {
         ) : isLoading ? (
           <>Loading...</>
         ) : data ? (
-          <div>
-            {cocktailList.map((item: Cocktail, index: any) => (
-                <div>{ item.drinkName }</div>
-            ))}
-          </div>
+          <List cocktailList={cocktailList} handleDetail={handleDetail} />
         ) : null}
       </div>
     </>
