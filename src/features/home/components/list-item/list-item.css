@@ -1,8 +1,17 @@
 .card {
     flex-grow: 1;
-    width: 20%;
-    height: 100px;
-    padding: 20px;
-    box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.08);
+    width: 250px;
+    background: #FFFFFF;
+    margin: 15px;
+    box-shadow: 0px 0px 0px 1px #EDEEF0, 1px 2px 16px rgba(0, 0, 0, 0.08);
     border-radius: 16px;
+}
+
+.card-body {
+    padding: 15px 20px;
+}
+
+.thumbnail-img {
+    width: 100%;
+    border-radius: 16px 16px 0px 0px;
 }

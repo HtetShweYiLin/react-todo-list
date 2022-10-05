@@ -19,7 +19,12 @@ const ListItem: FC<IProps> = ({ item, handleDetail }) => {
     <>
       <div className="card">
         <div className="card-info">
-          <h3 onClick={onClickCard}>{item.drinkName}</h3>
+          <div>
+            <img className="thumbnail-img" src={item.drinkThumbnail} />
+          </div>
+          <div className="h4-strong text-c300 card-body" onClick={onClickCard}>
+            {item.drinkName}
+          </div>
         </div>
         {/* <div className="card-action">
           <button className="btn-delete" onClick={onClickDelete}>
