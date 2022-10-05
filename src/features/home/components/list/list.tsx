@@ -2,6 +2,7 @@ import React, { FC } from "react";
 import { useSelector } from "react-redux";
 import { Cocktail } from "../../../../models/cocktail";
 import ListItem from "../list-item/listItem";
+import "./list.css";
 
 export interface IProps {
   cocktailList: Cocktail[];
@@ -20,14 +21,15 @@ const List: FC<IProps> = ({ cocktailList, handleDetail }) => {
 
   return (
     <>
-      <h1>Count : {cocktailList.length}</h1>
-      {cocktailList.map((item: Cocktail, index: any) => (
-        <ListItem
-          key={index}
-          item={item}
-          handleDetail={cardDetail}
-        />
-      ))}
+      <div className="cocktail-list">
+        {cocktailList.map((item: Cocktail, index: any) => (
+          <ListItem
+            key={index}
+            item={item}
+            handleDetail={cardDetail}
+          />
+        ))}
+      </div>
     </>
   );
 };
