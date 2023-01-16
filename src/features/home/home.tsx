@@ -1,38 +1,42 @@
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { useGetCocktailListQuery } from "../../api/cocktail/cocktailApi";
 import { Cocktail } from "../../models/cocktail";
 import { getDetailCocktail } from "./homeSclice";
 import List from "./components/list/list";
+import { AppDispatch } from '../../store/store';
+import { fetchCocktailList } from "../../api/cocktail/cocktailApi";
 
 const Home: FC = () => {
-  const { data, error, isLoading } = useGetCocktailListQuery({
-    country: "Turkey",
-  });
   const navigate = useNavigate();
 
+  // use AppDispatch instead of useDispatch
+  const dispatch = useDispatch<AppDispatch>();
+
   const cocktailList = useSelector((state: any) => state.home.cocktailList);
-  const dispatch = useDispatch();
-//   const handleDelete = (university: University) => {
-//     dispatch(deleteUniversity(university));
-//   };
+  console.log("cocktailList",cocktailList);
 
   const handleDetail = (cocktail: Cocktail) => {
     console.log("handleDetail")
     dispatch(getDetailCocktail(cocktail.drinkId));
     navigate(`/cocktail/${cocktail.drinkId}`);
   };
+  
+  // useEffect for fetching data
+  useEffect(() => {
+    dispatch(fetchCocktailList());
+  }, [dispatch]);
 
   return (
     <>
       <div>
-        {error ? (
+        {cocktailList.error ? (
           <>Oh no, there was an error</>
-        ) : isLoading ? (
+        ) : cocktailList.loading === 'pending' ? (
           <>Loading...</>
-        ) : data ? (
-          <List cocktailList={cocktailList} handleDetail={handleDetail} />
+        ) : cocktailList.data ? (
+          <List cocktailList={cocktailList.data} handleDetail={handleDetail} />
+          // <div>Testing</div>
         ) : null}
       </div>
     </>

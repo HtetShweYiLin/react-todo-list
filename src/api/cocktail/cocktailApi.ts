@@ -1,34 +1,19 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
 import { Cocktail } from "../../models/cocktail";
 
-export const cocktailApi = createApi({
-  reducerPath: "cocktailApi",
-  baseQuery: fetchBaseQuery({
-    baseUrl: "https://www.thecocktaildb.com/api/json/v1/1/",
-  }),
-  endpoints: (builder) => ({
-    getCocktailList: builder.query({
-      query: (country) => ({
-        url: `filter.php?c=Cocktail`
-      }),
-
-      transformResponse: (response: any) => {
-        let cocktailArray: Cocktail[] = [];
-        console.log("response",response.drinks);
-        let res = response.drinks;
-        res.map((cocktail: any) => {
-          let cocktailObj: Cocktail = {
+// create async thunk for fetching cocktail list from API url https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=Cocktail
+export const fetchCocktailList = createAsyncThunk('cocktailList/fetchCocktailList', async () => {
+    const response = await axios.get('https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=Cocktail');
+    let cocktailArray: Cocktail[] = [];
+    let res = response.data.drinks;
+    res.map((cocktail: any) => {
+        let cocktailObj: Cocktail = {
             drinkId: cocktail.idDrink,
             drinkName: cocktail.strDrink,
             drinkThumbnail: cocktail.strDrinkThumb
-          };
-          cocktailArray.push(cocktailObj);
-        });
-        console.log("cocktailArray",cocktailArray)
-        return cocktailArray;
-      },
-    }),
-  }),
+        };
+        cocktailArray.push(cocktailObj);
+    }); 
+    return cocktailArray;   
 });
-
-export const { useGetCocktailListQuery } = cocktailApi;

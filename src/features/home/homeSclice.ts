@@ -1,17 +1,29 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { cocktailApi } from "../../api";
 import { Cocktail } from "../../models/cocktail";
+import { fetchCocktailList } from "../../api/cocktail/cocktailApi";
 
-const cocktailList: Cocktail[] = [];
-const cocktailDetail: Cocktail = {
+//interface for homeSlice
+interface HomeState {
+  cocktailList: {
+    data: Cocktail[];
+    loading: string | null;
+    error: string | null;
+  } 
+  cocktailDetail: Cocktail;
+}
+
+//initial state for homeSlice
+const initialState: HomeState = { 
+  cocktailList: {
+    data: [],
+    loading: 'idle',
+    error: null,  
+  },           
+  cocktailDetail: {
     drinkId: "",
     drinkName: "",
-    drinkThumbnail: ""
-};
-
-const initialState = {
-  cocktailList: cocktailList,
-  cocktailDetail: cocktailDetail,
+    drinkThumbnail: "",
+  },  
 };
 
 export const homeSlice = createSlice({
@@ -19,7 +31,7 @@ export const homeSlice = createSlice({
   initialState,
   reducers: {
     getDetailCocktail: (state, action) => {
-      state.cocktailList.map((cocktail) => {
+      state.cocktailList.data.map((cocktail) => {
         if (cocktail.drinkId === action.payload) {
           state.cocktailDetail = cocktail;
         }
@@ -27,12 +39,38 @@ export const homeSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addMatcher(
-      cocktailApi.endpoints.getCocktailList.matchFulfilled,
-      (state, action) => {
-        state.cocktailList = action.payload;
+    // builder.addMatcher(
+    //   cocktailApi.endpoints.getCocktailList.matchFulfilled,
+    //   (state, action) => {
+    //     state.cocktailList = action.payload;
+    //   }
+    // );
+    // addCase for fetchCocktailList pending when fetching data when cocktailList loading is idle
+    builder.addCase(fetchCocktailList.pending, (state, action) => {
+      console.log("pending");
+      if (state.cocktailList.loading === 'idle') {
+        state.cocktailList.loading = 'pending';
       }
-    );
+    } );
+
+    // addCase for fetchCocktailList fulfilled when fetching data successfully
+    builder.addCase(fetchCocktailList.fulfilled, (state, action) => {
+      console.log("fulfilled");
+      if (state.cocktailList.loading === 'pending') {
+        state.cocktailList.loading = 'idle';
+        state.cocktailList.data = action.payload;
+      }
+    });
+
+    // addCase for fetchCocktailList rejected when fetching data failed
+    builder.addCase(fetchCocktailList.rejected, (state, action) => {
+      console.log("rejected");
+      if (state.cocktailList.loading === 'pending') {
+        state.cocktailList.loading = 'idle';
+        state.cocktailList.error = 'Failed to fetch cocktail list';
+      }
+    } );
+    
   },
 });
 
