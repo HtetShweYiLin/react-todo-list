@@ -1,14 +1,5 @@
-.cocktail-list {
-    display: flex;
-    flex-wrap: wrap;
-    max-width: 1300px;
-    margin: 0 auto;
-    padding: 20px 15px;
-    margin-top: 60px;
-}
-
-/* fixed top header bar */
-.fixed-header-bar {
+/* fixed top header bar with height 60px */
+.header-bar {
     position: fixed;
     top: 0;
     left: 0;
@@ -22,7 +13,7 @@
     padding: 0px 35px;
 }
 
-.fixed-header-bar .title {
+.header-bar .title {
     font-size: 25px;
     font-weight: 600;
     color: #000;

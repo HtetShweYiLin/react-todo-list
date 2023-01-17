@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { Cocktail } from "../../../../models/cocktail";
 import ListItem from "../list-item/listItem";
 import "./list.css";
+import { HeaderBar } from "../header-bar/header-bar";
 
 export interface IProps {
   cocktailList: Cocktail[];
@@ -21,6 +22,7 @@ const List: FC<IProps> = ({ cocktailList, handleDetail }) => {
 
   return (
     <>
+      <HeaderBar />
       <div className="cocktail-list">
         {cocktailList.map((item: Cocktail, index: any) => (
           <ListItem

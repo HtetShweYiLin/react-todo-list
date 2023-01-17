@@ -30,13 +30,10 @@ export const homeSlice = createSlice({
   name: "home",
   initialState,
   reducers: {
+    // reducer for getDetailCocktail from cocktailList by drinkId
     getDetailCocktail: (state, action) => {
-      state.cocktailList.data.map((cocktail) => {
-        if (cocktail.drinkId === action.payload) {
-          state.cocktailDetail = cocktail;
-        }
-      });
-    },
+      state.cocktailDetail = state.cocktailList.data.find((cocktail) => cocktail.drinkId === action.payload) as Cocktail;
+    }
   },
   extraReducers: (builder) => {
     // builder.addMatcher(

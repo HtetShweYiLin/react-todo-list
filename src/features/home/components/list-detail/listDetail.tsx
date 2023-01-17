@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import { HeaderBar } from "../header-bar/header-bar";
 import "./list-detail.css";
 const ListDetail = () => {
   const { name } = useParams();
@@ -8,11 +9,14 @@ const ListDetail = () => {
 
   return (
     <>
+      <HeaderBar />
       <div className="card-details">
         <div>
-          <img src={cocktail.drinkThumbnail} />
+          <div className="thumbnail-wrapper">
+            <img className="thumbnail" src={cocktail.drinkThumbnail} />
+          </div>
+          <div className="h4-strong text-c300 detail-text">{cocktail.drinkName}</div>
         </div>
-        <div className="h4-strong text-c300">{cocktail.drinkName}</div>
       </div>
     </>
   );

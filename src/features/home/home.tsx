@@ -36,7 +36,6 @@ const Home: FC = () => {
           <>Loading...</>
         ) : cocktailList.data ? (
           <List cocktailList={cocktailList.data} handleDetail={handleDetail} />
-          // <div>Testing</div>
         ) : null}
       </div>
     </>
